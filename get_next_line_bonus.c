@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         ::::::::           */
-/*   get_next_line.c                                     :+:    :+:           */
+/*   get_next_line_bonus.c                               :+:    :+:           */
 /*                                                      +:+                   */
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/10/18 10:21:19 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/10/18 14:04:10 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/10/18 19:22:34 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -76,16 +76,23 @@ int	build_line(t_buffer *const buf, char **ret)
 
 char	*get_next_line(int fd)
 {
-	static t_buffer	buf = {.key = 0, .size = 0, .index = 0};
+	static t_buffer	*head = NULL;
+	t_buffer *const	buf = get_buf(&head, fd);
 	char			*ret;
 	int				rval;
 
-	buf.key = fd;
+	if (!buf)
+		return (NULL);
 	ret = NULL;
 	rval = 1;
 	while (rval == 1)
-		rval = build_line(&buf, &ret);
+		rval = build_line(buf, &ret);
 	if (rval == -1)
+	{
+		free_buffer(&head, fd);
 		return (free_if_exists(ret));
+	}
+	if (!(buf->size - buf->index))
+		free_buffer(&head, fd);
 	return (ret);
 }
