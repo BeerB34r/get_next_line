@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/10/18 10:21:17 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/10/18 19:34:19 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/10/22 12:48:45 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+# endif
+
+# include <limits.h>
+# if BUFFER_SIZE > INT_MAX
+#  error "BUFFER_SIZE is larger than INT_MAX. this is not supported"
 # endif
 
 typedef struct s_buffer
