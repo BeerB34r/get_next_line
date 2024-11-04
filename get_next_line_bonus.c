@@ -6,11 +6,11 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/10/18 10:21:19 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/10/18 19:22:34 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/04 14:44:32 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include <get_next_line_bonus.h>
 #include <stdlib.h>
 #include <unistd.h>
 
